@@ -7,16 +7,6 @@ import {Task} from "./Task";
 import {isWhiteSpace} from "../helperFunctions/validateWhiteSpace";
 
 
-// function isTouchEvent(e: React.TouchEvent | React.KeyboardEvent): e is React.TouchEvent {
-//     return e && 'touches' in e;
-// }
-
-// function isMouseEvent(e: React.TouchEvent | React.MouseEvent): e is React.MouseEvent {
-//     return e && 'screenX' in e;
-// }
-
-
-
 export const TodoApp = React.memo(() => {
 
     const tasks = useAppSelector(state => state.tasks.tasks)
@@ -25,7 +15,7 @@ export const TodoApp = React.memo(() => {
     const dispatch = useAppDispatch()
 
     const onChangeHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.keyCode === 13 && !isWhiteSpace(e.currentTarget.value)) {
+        if (e.code === 'Enter' && !isWhiteSpace(e.currentTarget?.value)) {
             dispatch(addTask({isDone: false, title: e.currentTarget.value}))
             e.currentTarget.value = ''
         }
@@ -44,7 +34,6 @@ export const TodoApp = React.memo(() => {
             <HeaderApp/>
             <Container size={'xs'} pt={70}>
                 <Input.Wrapper description="This field cannot be empty!!!">
-                    <button onTouchStart={(e) => {console.log(e)}}></button>
                     <Input placeholder={'what needs to be done?'}
                            onKeyPress={onChangeHandler}/>
                 </Input.Wrapper>
