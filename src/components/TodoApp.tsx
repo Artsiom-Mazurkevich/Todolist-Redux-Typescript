@@ -25,7 +25,7 @@ export const TodoApp = React.memo(() => {
     const dispatch = useAppDispatch()
 
     const onChangeHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter' && !isWhiteSpace(e.currentTarget.value)) {
+        if (e.keyCode === 13 && !isWhiteSpace(e.currentTarget.value)) {
             dispatch(addTask({isDone: false, title: e.currentTarget.value}))
             e.currentTarget.value = ''
         }
